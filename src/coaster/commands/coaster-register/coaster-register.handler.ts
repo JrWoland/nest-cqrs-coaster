@@ -1,5 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CoasterRegisterCommand } from './coaster-register.command';
+import { Logger } from '@nestjs/common';
 
 @CommandHandler(CoasterRegisterCommand)
 export class RegisterNewCoasterHandler
@@ -8,6 +9,6 @@ export class RegisterNewCoasterHandler
   constructor() {}
 
   async execute(command: CoasterRegisterCommand) {
-    console.log('CoasterRegisterCommand...', command);
+    Logger.log('CoasterRegisterCommand...', command);
   }
 }
