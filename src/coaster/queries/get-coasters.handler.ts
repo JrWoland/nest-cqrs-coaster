@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetCoastersListQuery } from './get-coasters.query';
+import { Logger } from '@nestjs/common';
 
 @QueryHandler(GetCoastersListQuery)
 export class GetCoastersListHandler
@@ -8,6 +9,6 @@ export class GetCoastersListHandler
   constructor() {}
 
   async execute(query: GetCoastersListQuery) {
-    console.log(' GetCoastersListQuery...', query);
+    Logger.log('GetCoastersListQuery...');
   }
 }
