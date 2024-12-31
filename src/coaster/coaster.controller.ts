@@ -4,7 +4,7 @@ import { CoasterRegisterDto } from './interfaces/coaster-register-dto.interface'
 import { CoasterRegisterCommand } from './commands/coaster-register/coaster-register.command';
 import { GetCoastersListQuery } from './queries/get-coasters.query';
 import { CoasterWagonRegisterDto } from './interfaces/coaster-register-dto.interface copy';
-import { CoasterWagonRegisterCommand } from './commands/coaster-wagon-register.command';
+import { CoasterWagonRegisterCommand } from './commands/coaster-wagon-register/coaster-wagon-register.command';
 
 @Controller('coasters')
 export class CoasterController {
