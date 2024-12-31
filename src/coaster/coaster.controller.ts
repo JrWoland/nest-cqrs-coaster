@@ -3,6 +3,8 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CoasterRegisterDto } from './interfaces/coaster-register-dto.interface';
 import { CoasterRegisterCommand } from './commands/coaster-register.command';
 import { GetCoastersListQuery } from './queries/get-coasters.query';
+import { CoasterWagonRegisterDto } from './interfaces/coaster-register-dto.interface copy';
+import { CoasterWagonRegisterCommand } from './commands/coaster-wagon-register.command';
 
 @Controller('coaster')
 export class CoasterController {
@@ -27,5 +29,12 @@ export class CoasterController {
   @Get('coasters')
   async getCoastersList(): Promise<any[]> {
     return this.queryBus.execute(new GetCoastersListQuery());
+  }
+
+  @Post('coaster/:coasterId/wagons')
+  async addWagonToCoaster(@Body() dto: CoasterWagonRegisterDto) {
+    return this.commandBus.execute(
+      new CoasterWagonRegisterCommand(dto.liczba_miejsc),
+    );
   }
 }
