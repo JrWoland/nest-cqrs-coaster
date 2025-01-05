@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1cb1d0ff-f515-4679-852d-e07d80ae88c6",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  },
+  {
+    "id": "10c16b50-e39b-4698-aa25-fc2e1b57e4d9",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  },
+  {
+    "id": "51b7ab53-b98a-4faa-8a7e-7b0a6a22ba1a",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  },
+  {
+    "id": "16b0a38e-2df5-4841-afd8-92ec33d500ad",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  },
+  {
+    "id": "8b599634-8a70-4663-8f4a-5aed1fbe0a6d",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  },
+  {
+    "id": "b823d159-c873-49de-a7cd-ac73f119c66c",
+    "wagonsNumber": 1,
+    "stuffNumber": 5,
+    "clientsNumber": 5,
+    "openingHour": "8:00",
+    "closingHour": "16:00",
+    "routeLength": 1000
+  }
+]

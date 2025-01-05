@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6479:6379" # użuwam 6479 zamiast domyślnego 6379 bo na win10 miałem poblokowane porty
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+volumes:
+  redis-data:
+    driver: local
