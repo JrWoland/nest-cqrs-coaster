@@ -9,6 +9,6 @@ export class GetCoastersListHandler
   constructor() {}
 
   async execute(query: GetCoastersListQuery) {
-    Logger.log('GetCoastersListQuery...');
+    Logger.log('GetCoastersListQuery...', query);
   }
 }
