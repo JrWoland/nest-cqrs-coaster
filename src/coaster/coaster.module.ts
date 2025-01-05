@@ -6,6 +6,7 @@ import { RegisterNewCoasterHandler } from './commands/coaster-register/coaster-r
 import { RegisterNewWagonCoasterHandler } from './commands/coaster-wagon-register/coaster-wagon-register.handler';
 import { DeleteWagonFromCoasterHandler } from './commands/coaster-wagon-delete/coaster-wagon-delete.handler';
 import { UpdateCoasterInfoHandler } from './commands/coaster-update-info/coaster-update-info.handler';
+import { CoasterRepository } from './repository/coaster.repository';
 
 @Module({
   imports: [CqrsModule],
@@ -16,6 +17,7 @@ import { UpdateCoasterInfoHandler } from './commands/coaster-update-info/coaster
     RegisterNewWagonCoasterHandler,
     DeleteWagonFromCoasterHandler,
     UpdateCoasterInfoHandler,
+    CoasterRepository,
   ],
 })
 export class CoasterModule {}
