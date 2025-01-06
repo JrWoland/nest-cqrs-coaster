@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { RedisMicroserviceModule } from './redis-microservice/redis-microservice.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,20 +16,23 @@ async function bootstrap() {
   const redisPort = configService.get<number>('REDIS_PORT', 6479);
 
   const redisMicroservice =
-    await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-      transport: Transport.REDIS,
-      options: {
-        host: redisHost,
-        port: redisPort,
+    await NestFactory.createMicroservice<MicroserviceOptions>(
+      RedisMicroserviceModule,
+      {
+        transport: Transport.REDIS,
+        options: {
+          host: redisHost,
+          port: redisPort,
+        },
       },
-    });
+    );
 
   try {
+    redisMicroservice.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
     await redisMicroservice.listen();
     console.log(`Redis microservice is running on ${redisHost}:${redisPort}`);
   } catch (error) {
     console.error('Failed to start Redis microservice:', error);
-    process.exit(1);
   }
 
   // Start main application

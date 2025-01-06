@@ -5,6 +5,7 @@ import { CoasterModule } from './coaster/coaster.module';
 import { ConfigModule } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { createLoggerConfig } from './logger.config';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { createLoggerConfig } from './logger.config';
         return createLoggerConfig(environment);
       },
     }),
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
