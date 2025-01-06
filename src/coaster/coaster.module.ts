@@ -7,9 +7,11 @@ import { RegisterNewWagonCoasterHandler } from './commands/coaster-wagon-registe
 import { DeleteWagonFromCoasterHandler } from './commands/coaster-wagon-delete/coaster-wagon-delete.handler';
 import { UpdateCoasterInfoHandler } from './commands/coaster-update-info/coaster-update-info.handler';
 import { CoasterRepository } from './repository/coaster.repository';
+import { RedisMicroserviceModule } from 'src/redis-microservice/redis-microservice.module';
+import { RedisClientProvider } from 'src/redis-client.provider';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, RedisMicroserviceModule],
   controllers: [CoasterController],
   providers: [
     GetCoastersListHandler,
@@ -18,6 +20,7 @@ import { CoasterRepository } from './repository/coaster.repository';
     DeleteWagonFromCoasterHandler,
     UpdateCoasterInfoHandler,
     CoasterRepository,
+    RedisClientProvider,
   ],
 })
 export class CoasterModule {}
