@@ -35,6 +35,10 @@ export class RedisHealthIndicator extends HealthIndicator {
   }
 
   async isHealthy(key: string): Promise<HealthIndicatorResult> {
+    if (!this.isConnected) {
+      return this.getStatus(key, false, { error: 'DISCONNECTED' });
+    }
+
     try {
       await this.client.ping();
 
