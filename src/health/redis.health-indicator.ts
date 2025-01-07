@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
-import { RedisClientType } from '@redis/client';
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 
 @Injectable()
 export class RedisHealthIndicator extends HealthIndicator {
@@ -24,11 +23,10 @@ export class RedisHealthIndicator extends HealthIndicator {
     });
 
     this.client.on('error', (err) => {
+      if (this.isConnected) console.error('Redis error:', err.message);
       this.isConnected = false;
-      console.error('Redis error:', err.message);
     });
 
-    // Połącz klienta z serwerem Redis
     this.client.connect().catch((err) => {
       console.error('Failed to connect to Redis:', err.message);
     });
