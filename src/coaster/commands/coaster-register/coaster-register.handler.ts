@@ -16,7 +16,6 @@ export class RegisterNewCoasterHandler
     this.repository.save(
       new Coaster(
         randomUUID(),
-        1,
         command.numberOfStuff,
         command.numberOfClients,
         command.openingHour,

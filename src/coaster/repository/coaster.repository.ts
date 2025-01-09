@@ -9,7 +9,22 @@ const PATH = path.join(dataDir, 'coasters.json');
 @Injectable()
 export class CoasterRepository {
   async findAllCoasters(): Promise<Coaster[]> {
-    return readJsonFile(PATH);
+    const file: any[] = readJsonFile(PATH) || [];
+
+    const coasters = file.map(
+      (i) =>
+        new Coaster(
+          i.id,
+          i.stuffNumber,
+          i.clientsNumber,
+          i.openingHour,
+          i.closingHour,
+          i.routeLength,
+          i.wagons,
+        ),
+    );
+
+    return coasters;
   }
 
   async findCoasterById(id: string): Promise<Coaster | void> {
@@ -22,10 +37,11 @@ export class CoasterRepository {
     return coaster;
   }
 
-  async updateCoaster(id: string, coaster: Coaster): Promise<Coaster | void> {
-    const coasters = await this.findAllCoasters();
-
-    const index = coasters.findIndex((i) => i.id === id);
+  private async updateCoaster(
+    coasters: Coaster[],
+    coaster: Coaster,
+  ): Promise<Coaster | void> {
+    const index = coasters.findIndex((i) => i.id === coaster.id);
 
     if (index !== -1) coasters[index] = coaster;
 
@@ -35,7 +51,11 @@ export class CoasterRepository {
   async save(coaster: Coaster) {
     const coasters = await this.findAllCoasters();
 
-    coasters.push(coaster);
+    if (coasters.some((i) => i.id === coaster.id)) {
+      return this.updateCoaster(coasters, coaster);
+    } else {
+      coasters.push(coaster);
+    }
 
     writeJsonFile(PATH, coasters);
   }

@@ -1,29 +1,40 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { UUID } from 'node:crypto';
+import { Wagon } from './wagon.model';
 
 export class Coaster extends AggregateRoot {
   constructor(
     public readonly id: UUID,
-    private readonly wagonsNumber: number,
-    private readonly stuffNumber: number,
-    private readonly clientsNumber: number,
-    private readonly openingHour: string,
-    private readonly closingHour: string,
-    private readonly routeLength: number,
+    private stuffNumber: number,
+    private clientsNumber: number,
+    private openingHour: string,
+    private closingHour: string,
+    private routeLength: number,
+    private wagons: Wagon[] = [],
   ) {
     super();
     this.autoCommit = true;
   }
 
-  addWagon(wagon: string) {
-    console.log(wagon, 'ADDED');
-
-    // logic
+  public updateCoasterInformations({
+    stuffNumber,
+    clientsNumber,
+    openingHour,
+    closingHour,
+  }) {
+    this.stuffNumber = stuffNumber;
+    this.clientsNumber = clientsNumber;
+    this.openingHour = openingHour;
+    this.closingHour = closingHour;
   }
 
-  deleteWagon(wagon: string) {
-    console.log(wagon, 'DELETED');
+  public addWagon(wagon: Wagon) {
+    this.wagons.push(wagon);
+    console.log(wagon, 'ADDED');
+  }
 
-    // logic
+  public deleteWagon(wagonId: string) {
+    this.wagons = this.wagons.filter((i) => i.id !== wagonId);
+    console.log(wagonId, 'DELETED');
   }
 }
