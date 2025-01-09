@@ -9,6 +9,7 @@ import { UpdateCoasterInfoHandler } from './commands/coaster-update-info/coaster
 import { CoasterRepository } from './repository/coaster.repository';
 import { RedisMicroserviceModule } from 'src/redis-microservice/redis-microservice.module';
 import { RedisClientProvider } from 'src/redis-client.provider';
+import { EventHandlers } from './events';
 
 @Module({
   imports: [CqrsModule, RedisMicroserviceModule],
@@ -21,6 +22,7 @@ import { RedisClientProvider } from 'src/redis-client.provider';
     UpdateCoasterInfoHandler,
     CoasterRepository,
     RedisClientProvider,
+    ...EventHandlers,
   ],
 })
 export class CoasterModule {}
