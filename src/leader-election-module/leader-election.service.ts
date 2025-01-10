@@ -36,7 +36,7 @@ export class LeaderElectionService {
   @Cron(CronExpression.EVERY_30_SECONDS)
   async electLeader() {
     const nodes = await this.getActiveNodes();
-    nodes.sort((x, y) => x.timestamp - y.timestamp);
+    (nodes || []).sort((x, y) => x?.timestamp - y?.timestamp);
 
     const leader = nodes[0]?.nodeId || null;
     this.redisClient.set(this.nodeLeader, leader);

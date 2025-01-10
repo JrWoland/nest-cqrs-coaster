@@ -19,6 +19,10 @@ interface PersistCoaster {
 
 @Injectable()
 export class CoasterRepository {
+  getRawData(): Record<string, any> {
+    return readJsonFile(PATH);
+  }
+
   async findAllCoasters(): Promise<Record<string, Coaster>> {
     const file: any = readJsonFile(PATH);
 
