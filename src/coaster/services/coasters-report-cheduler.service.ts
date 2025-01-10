@@ -22,7 +22,12 @@ export class ReportScheduler {
         value.routeLength,
         value.speed,
       ).generateReport();
-      Logger.log(report);
+
+      if (report.toLowerCase().includes('status: alert')) {
+        Logger.warn(report);
+      } else {
+        Logger.log(report);
+      }
     }
   }
 }

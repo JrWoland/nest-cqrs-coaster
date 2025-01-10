@@ -5,5 +5,6 @@ export class CoasterRegisterCommand {
     public readonly routeLength: number,
     public readonly openingHour: string,
     public readonly closeHour: string,
+    public readonly speed: number,
   ) {}
 }

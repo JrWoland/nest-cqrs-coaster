@@ -4,4 +4,5 @@ export interface CoasterRegisterDto {
   dl_trasy: number;
   godziny_od: string;
   godziny_do: string;
+  predkosc: number;
 }

@@ -15,6 +15,7 @@ interface PersistCoaster {
   closingHour: string;
   routeLength: number;
   wagons: [];
+  speed: number;
 }
 
 @Injectable()
@@ -37,6 +38,7 @@ export class CoasterRepository {
         coasterValue.closingHour,
         coasterValue.routeLength,
         coasterValue.wagons,
+        coasterValue.speed,
       );
     }
     return coasters;

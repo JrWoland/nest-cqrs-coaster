@@ -28,6 +28,7 @@ export class UpdateCoasterInfoHandler
       clientsNumber: command.numberOfClients,
       closingHour: command.closeHour,
       openingHour: command.openingHour,
+      speed: command.speed,
     });
 
     this.repository.save(coaster);

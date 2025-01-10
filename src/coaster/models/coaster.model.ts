@@ -11,6 +11,7 @@ export class Coaster extends AggregateRoot {
     private closingHour: string,
     private routeLength: number,
     private wagons: Wagon[] = [],
+    private speed: number,
   ) {
     super();
     this.autoCommit = true;
@@ -21,11 +22,13 @@ export class Coaster extends AggregateRoot {
     clientsNumber,
     openingHour,
     closingHour,
+    speed,
   }) {
     this.stuffNumber = stuffNumber;
     this.clientsNumber = clientsNumber;
     this.openingHour = openingHour;
     this.closingHour = closingHour;
+    this.speed = speed;
   }
 
   public addWagon(wagon: Wagon) {

@@ -33,6 +33,7 @@ export class CoasterController {
         dto.dl_trasy,
         dto.godziny_od,
         dto.godziny_do,
+        dto.predkosc,
       ),
     );
   }
@@ -64,6 +65,7 @@ export class CoasterController {
         dto.liczba_klientow,
         dto.godziny_od,
         dto.godziny_do,
+        dto.predkosc,
       ),
     );
   }

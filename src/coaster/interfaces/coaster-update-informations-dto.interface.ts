@@ -3,4 +3,5 @@ export interface CoasterUpdateInformationsDto {
   liczba_klientow: number;
   godziny_od: string;
   godziny_do: string;
+  predkosc: number;
 }

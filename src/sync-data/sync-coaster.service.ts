@@ -14,12 +14,6 @@ export class SyncService {
     this.redisClient.on('connect', () => {
       console.log('Redis data-sync service connected');
       this.isConnected = true;
-      try {
-        this.syncChanges();
-      } catch (error) {
-        console.log(error);
-        this.isConnected = false;
-      }
     });
 
     this.redisClient.on('end', () => {

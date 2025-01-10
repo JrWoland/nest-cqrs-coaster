@@ -27,6 +27,8 @@ export class RegisterNewCoasterHandler
       command.openingHour,
       command.closeHour,
       command.routeLength,
+      [],
+      command.speed,
     );
 
     await this.repository.save(coaster);
