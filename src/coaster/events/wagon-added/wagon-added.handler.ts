@@ -6,7 +6,7 @@ import { SyncService } from 'src/sync-data/sync-coaster.service';
 export class WagonAddedHandler implements IEventHandler<WagonAddedEvent> {
   constructor(private syncData: SyncService) {}
 
-  handle(event: WagonAddedEvent) {
+  async handle(event: WagonAddedEvent) {
     console.log(
       `Wagon with ID ${event.wagonId} added to Coaster ${event.coasterId}`,
     );

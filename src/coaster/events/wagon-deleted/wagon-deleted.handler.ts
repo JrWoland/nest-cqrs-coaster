@@ -6,7 +6,7 @@ import { SyncService } from 'src/sync-data/sync-coaster.service';
 export class WagonDeletedHandler implements IEventHandler<WagonDeletedEvent> {
   constructor(private syncData: SyncService) {}
 
-  handle(event: WagonDeletedEvent) {
+  async handle(event: WagonDeletedEvent) {
     console.log(
       `Wagon with ID ${event.wagonId} deleted from Coaster ${event.coasterId}`,
     );

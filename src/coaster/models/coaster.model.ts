@@ -1,8 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { UUID } from 'node:crypto';
 import { Wagon } from './wagon.model';
-import { WagonAddedEvent } from '../events/wagon-added/wagon-added.event';
-import { WagonDeletedEvent } from '../events/wagon-deleted/wagon-deleted.event';
 
 export class Coaster extends AggregateRoot {
   constructor(
@@ -32,11 +30,9 @@ export class Coaster extends AggregateRoot {
 
   public addWagon(wagon: Wagon) {
     this.wagons.push(wagon);
-    this.apply(new WagonAddedEvent(this.id, wagon.id));
   }
 
   public deleteWagon(wagonId: string) {
     this.wagons = this.wagons.filter((i) => i.id !== wagonId);
-    this.apply(new WagonDeletedEvent(this.id, wagonId));
   }
 }

@@ -10,6 +10,6 @@ export class NewCoasterRegisteredHandler
 
   async handle(event: NewCoasterRegisteredEvent) {
     console.log(`Coaster with ID ${event.coasterId} registered`);
-    await this.syncData.syncChanges();
+    this.syncData.syncChanges();
   }
 }

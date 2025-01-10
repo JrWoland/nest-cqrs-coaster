@@ -7,7 +7,7 @@ import { CoasterReportService } from './coaster-report.service';
 export class ReportScheduler {
   constructor(private localStorage: CoasterRepository) {}
 
-  @Cron(CronExpression.EVERY_30_SECONDS)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   logReport() {
     const data = this.localStorage.getRawData();
 

@@ -1,9 +1,15 @@
-import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import {
+  CommandHandler,
+  EventBus,
+  EventPublisher,
+  ICommandHandler,
+} from '@nestjs/cqrs';
 import { CoasterWagonRegisterCommand } from './coaster-wagon-register.command';
 import { Logger } from '@nestjs/common';
 import { CoasterRepository } from 'src/coaster/repository/coaster.repository';
 import { Wagon } from 'src/coaster/models/wagon.model';
 import { randomUUID } from 'node:crypto';
+import { WagonAddedEvent } from 'src/coaster/events/wagon-added/wagon-added.event';
 
 @CommandHandler(CoasterWagonRegisterCommand)
 export class RegisterNewWagonCoasterHandler
@@ -12,6 +18,7 @@ export class RegisterNewWagonCoasterHandler
   constructor(
     private repository: CoasterRepository,
     private publisher: EventPublisher,
+    private eventBus: EventBus,
   ) {}
 
   async execute(command: CoasterWagonRegisterCommand) {
@@ -29,6 +36,8 @@ export class RegisterNewWagonCoasterHandler
 
     coaster.addWagon(wagon);
 
-    this.repository.save(coaster);
+    await this.repository.save(coaster);
+
+    this.eventBus.publish(new WagonAddedEvent(command.coasterId, wagon.id));
   }
 }
