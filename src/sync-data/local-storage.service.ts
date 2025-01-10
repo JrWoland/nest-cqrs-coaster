@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { readJsonFile, writeJsonFile } from '../utils/file.helper';
-import path from 'path';
+import * as path from 'path';
 
 const dataDir = path.resolve(__dirname, `../../data/`);
 const PATH = path.join(dataDir, 'coasters.json');
@@ -9,17 +9,17 @@ const PATH = path.join(dataDir, 'coasters.json');
 export class LocalStorageService {
   private readonly dataPath = PATH;
 
-  getData(): any {
-    return readJsonFile(this.dataPath);
-  }
-
-  getAllChanges(): any[] {
+  getAllChanges(): Record<string, any> {
     return readJsonFile(this.dataPath) || {};
   }
 
-  addChange(change: any): void {
-    const changes = this.getAllChanges();
-    changes.push(change);
-    writeJsonFile(this.dataPath, changes);
+  saveData(data: any): void {
+    writeJsonFile(this.dataPath, data);
+  }
+
+  updateData(key: string, value: any): void {
+    const data = this.getAllChanges();
+    data[key] = value;
+    writeJsonFile(this.dataPath, data);
   }
 }

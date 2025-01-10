@@ -7,11 +7,12 @@ import { RedisClientProvider } from 'src/redis-client.provider';
 import { EventHandlers } from './events';
 import { CommandHandlers } from './commands';
 
+import { SyncModule } from 'src/sync-data/sync.module';
 import { ReportScheduler } from './services/coasters-report-cheduler.service';
 import { CoasterReportService } from './services/coaster-report.service';
 
 @Module({
-  imports: [CqrsModule, RedisMicroserviceModule],
+  imports: [CqrsModule, RedisMicroserviceModule, SyncModule],
   controllers: [CoasterController],
   providers: [
     CoasterRepository,

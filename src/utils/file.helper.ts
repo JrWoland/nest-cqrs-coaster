@@ -10,14 +10,14 @@ export function readJsonFile(filePath: string): any {
     }
 
     if (!fs.existsSync(filePath)) {
-      writeJsonFile(filePath, []);
+      writeJsonFile(filePath, {});
     }
 
     const data = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
     console.error(`Error reading JSON file: ${filePath}`, error);
-    return [];
+    return {};
   }
 }
 

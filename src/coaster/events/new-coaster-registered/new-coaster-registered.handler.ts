@@ -1,22 +1,15 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { NewCoasterRegisteredEvent } from './new-coaster-registered.event';
-import { RedisClientProvider } from 'src/redis-client.provider';
+import { SyncService } from 'src/sync-data/sync-coaster.service';
 
 @EventsHandler(NewCoasterRegisteredEvent)
 export class NewCoasterRegisteredHandler
   implements IEventHandler<NewCoasterRegisteredEvent>
 {
-  constructor(private redisClientProvider: RedisClientProvider) {}
+  constructor(private syncData: SyncService) {}
 
   async handle(event: NewCoasterRegisteredEvent) {
     console.log(`Coaster with ID ${event.coasterId} registered`);
-    // Additional logic for handling the event
-
-    await this.redisClientProvider
-      .getClient()
-      .send('sync_coaster', {
-        coasterId: event.coasterId,
-      })
-      .toPromise();
+    await this.syncData.syncChanges();
   }
 }
