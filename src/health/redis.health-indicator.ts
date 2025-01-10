@@ -10,7 +10,9 @@ export class RedisHealthIndicator extends HealthIndicator {
   constructor() {
     super();
 
-    this.client = createClient({ url: 'redis://localhost:6479' });
+    this.client = createClient({
+      url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+    });
 
     this.client.on('connect', () => {
       this.isConnected = true;
