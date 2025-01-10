@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { createLoggerConfig } from './logger.config';
 import { HealthModule } from './health/health.module';
+import { LeaderElectionModule } from './leader-election-module/leader-election.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { HealthModule } from './health/health.module';
         return createLoggerConfig(environment);
       },
     }),
+    LeaderElectionModule,
     HealthModule,
   ],
   controllers: [AppController],

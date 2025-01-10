@@ -1,9 +1,4 @@
-import {
-  CommandHandler,
-  EventBus,
-  EventPublisher,
-  ICommandHandler,
-} from '@nestjs/cqrs';
+import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 import { CoasterRegisterCommand } from './coaster-register.command';
 import { Logger } from '@nestjs/common';
 import { CoasterRepository } from 'src/coaster/repository/coaster.repository';
@@ -18,7 +13,6 @@ export class RegisterNewCoasterHandler
   constructor(
     private repository: CoasterRepository,
     private eventBus: EventBus,
-    private publisher: EventPublisher,
   ) {}
 
   async execute(command: CoasterRegisterCommand) {
@@ -35,7 +29,8 @@ export class RegisterNewCoasterHandler
       command.routeLength,
     );
 
+    await this.repository.save(coaster);
+
     this.eventBus.publish(new NewCoasterRegisteredEvent(id));
-    this.repository.save(coaster);
   }
 }
